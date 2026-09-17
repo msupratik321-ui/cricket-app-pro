@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Match Toss Pro v7</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    min-height:100vh;
+    color:white;
+    background:
+    radial-gradient(circle at 50% -10%,#164e75,#071321 40%,#02060c 80%);
+}
+
+button,input,select{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    width:100%;
+    max-width:1150px;
+    margin:auto;
+    padding:20px;
+}
+
+/* HEADER */
+
+header{
+    text-align:center;
+    padding:20px 0;
+}
+
+.logo{
+    color:#19d8ff;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:5px;
+}
+
+header h1{
+    font-size:45px;
+    margin:10px 0;
+}
+
+header p{
+    color:#94a3b8;
+}
+
+/* NAVIGATION */
+
+nav{
+    display:flex;
+    gap:8px;
+    background:rgba(8,18,32,.95);
+    border:1px solid #20384e;
+    padding:8px;
+    border-radius:15px;
+    margin-bottom:20px;
+}
+
+.nav-btn{
+    flex:1;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    color:#94a3b8;
+    background:transparent;
+}
+
+.nav-btn:hover{
+    color:white;
+}
+
+.nav-btn.active{
+    color:white;
+    background:#087fa5;
+}
+
+/* PAGES */
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+/* CARDS */
+
+.card{
+    background:rgba(8,18,32,.94);
+    border:1px solid #1c344c;
+    border-radius:20px;
+    padding:24px;
+    margin-bottom:18px;
+    box-shadow:0 18px 50px rgba(0,0,0,.25);
+}
+
+.title{
+    color:#19d8ff;
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:18px;
+}
+
+/* HOME */
+
+.hero{
+    text-align:center;
+    padding:40px 25px;
+}
+
+.hero-icon{
+    font-size:70px;
+}
+
+.hero h2{
+    font-size:35px;
+    margin:15px 0 8px;
+}
+
+.hero p{
+    color:#94a3b8;
+    max-width:650px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.primary{
+    margin-top:25px;
+    padding:16px 35px;
+    border:0;
+    border-radius:13px;
+    color:white;
+    font-weight:bold;
+    font-size:17px;
+    background:linear-gradient(90deg,#00b4db,#0077a1);
+}
+
+.primary:hover{
+    transform:translateY(-2px);
+}
+
+/* QUICK CARDS */
+
+.quick{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.quick-card{
+    padding:22px;
+    background:#050c16;
+    border:1px solid #21394f;
+    border-radius:15px;
+    text-align:center;
+}
+
+.quick-icon{
+    font-size:35px;
+}
+
+.quick-number{
+    color:#19d8ff;
+    font-size:28px;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.quick-label{
+    color:#94a3b8;
+    font-size:13px;
+    margin-top:4px;
+}
+
+/* MATCH SETUP */
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+label{
+    display:block;
+    color:#94a3b8;
+    font-size:12px;
+    margin-bottom:7px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    background:#050b14;
+    color:white;
+    border:1px solid #30445a;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#19d8ff;
+}
+
+/* TEAMS */
+
+.teams{
+    display:grid;
+    grid-template-columns:1fr 70px 1fr;
+    align-items:center;
+    gap:15px;
+}
+
+.team{
+    padding:18px;
+    background:#050b14;
+    border:1px solid #263d53;
+    border-radius:14px;
+}
+
+.team-label{
+    color:#19d8ff;
+    font-size:12px;
+    margin-bottom:9px;
+    font-weight:bold;
+}
+
+.vs{
+    text-align:center;
+    color:#19d8ff;
+    font-weight:bold;
+    font-size:22px;
+}
+
+/* CHOICES */
+
+.choice-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.choice{
+    padding:15px;
+    color:white;
+    background:#07101c;
+    border:1px solid #30445a;
+    border-radius:11px;
+}
+
+.choice:hover{
+    border-color:#19d8ff;
+}
+
+.choice.selected{
+    background:#008db5;
+    border-color:#19d8ff;
+}
+
+/* COIN */
+
+.coin-area{
+    text-align:center;
+}
+
+.coin-wrap{
+    width:210px;
+    height:210px;
+    margin:20px auto;
+    perspective:1000px;
+}
+
+.coin{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+}
+
+.face{
+    position:absolute;
+    inset:0;
+    border-radius:50%;
+    backface-visibility:hidden;
+
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:
+    radial-gradient(circle at 30% 25%,
+    #fffbd0,
+    #ffd84d 30%,
+    #e2a800 65%,
+    #795000);
+
+    border:9px solid #936600;
+
+    box-shadow:
+    inset 0 0 25px rgba(255,255,255,.65),
+    0 0 30px rgba(255,193,7,.3);
+}
+
+.face b{
+    color:#573700;
+    font-size:65px;
+}
+
+.face small{
+    color:#573700;
+    font-weight:bold;
+    letter-spacing:4px;
+}
+
+.back{
+    transform:rotateY(180deg);
+}
+
+.flip{
+    animation:flip 2.3s ease-in-out;
+}
+
+@keyframes flip{
+    0%{
+        transform:rotateY(0deg);
+    }
+    100%{
+        transform:rotateY(1800deg);
+    }
+}
+
+.coin-status{
+    min-height:25px;
+    color:#94a3b8;
+    margin-bottom:17px;
+}
+
+.toss{
+    width:100%;
+    padding:17px;
+    border:0;
+    border-radius:13px;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#00b4db,#0077a1);
+}
+
+.toss:disabled{
+    opacity:.5;
+}
+
+/* RESULT */
+
+.result{
+    display:none;
+    text-align:center;
+}
+
+.result.show{
+    display:block;
+}
+
+.result-label{
+    color:#19d8ff;
+    letter-spacing:4px;
+    font-size:12px;
+}
+
+.result-side{
+    font-size:50px;
+    font-weight:bold;
+    margin:12px;
+}
+
+.winner{
+    color:#22d3ee;
+    font-size:23px;
+}
+
+.decision{
+    margin-top:20px;
+    background:#050b14;
+    border-radius:13px;
+    padding:18px;
+}
+
+.decision p{
+    color:#94a3b8;
+    margin-bottom:12px;
+}
+
+.decision-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.decision-btn{
+    padding:14px;
+    background:#07101c;
+    color:white;
+    border:1px solid #30445a;
+    border-radius:10px;
+}
+
+.selected-choice{
+    color:#22d3ee;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* HISTORY */
+
+.history-item{
+    background:#050b14;
+    border-left:3px solid #19d8ff;
+    padding:15px;
+    border-radius:10px;
+    margin-top:10px;
+    line-height:1.7;
+}
+
+.history-item strong{
+    color:#22d3ee;
+}
+
+.empty{
+    color:#64748b;
+    text-align:center;
+    padding:20px;
+}
+
+.history-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+.secondary{
+    padding:13px;
+    background:transparent;
+    color:#cbd5e1;
+    border:1px solid #30445a;
+    border-radius:10px;
+}
+
+/* FEATURES */
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.feature{
+    background:#050b14;
+    border:1px solid #20384e;
+    padding:20px;
+    border-radius:14px;
+}
+
+.feature h3{
+    margin-bottom:7px;
+}
+
+.feature p{
+    color:#94a3b8;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    color:#64748b;
+    padding:25px;
+    font-size:12px;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .app{
+        padding:12px;
+    }
+
+    header h1{
+        font-size:35px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+    }
+
+    .nav-btn{
+        min-width:45%;
+    }
+
+    .grid,
+    .quick,
+    .features{
+        grid-template-columns:1fr;
+    }
+
+    .teams{
+        grid-template-columns:1fr;
+    }
+
+    .vs{
+        margin:-5px;
+    }
+
+    .choice-grid,
+    .decision-grid,
+    .history-actions{
+        grid-template-columns:1fr;
+    }
+
+    .coin-wrap{
+        width:165px;
+        height:165px;
+    }
+
+    .face b{
+        font-size:50px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+<div class="logo">⚡ MATCH RANDOMIZER SYSTEM</div>
+<h1>🏆 MATCH TOSS</h1>
+<p>Professional Sports Toss Platform</p>
+</header>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<button class="nav-btn active" data-page="home">
+🏠 HOME
+</button>
+
+<button class="nav-btn" data-page="new">
+🪙 NEW TOSS
+</button>
+
+<button class="nav-btn" data-page="history">
+📜 MATCHES
+</button>
+
+</nav>
+
+
+<!-- ================= HOME ================= -->
+
+<section id="home" class="page active">
+
+<div class="card hero">
+
+<div class="hero-icon">🏆</div>
+
+<h2>Welcome to Match Toss</h2>
+
+<p>
+A simple and professional toss platform
+for cricket, football and future sports matches.
+</p>
+
+<button class="primary" id="startButton">
+🪙 START NEW TOSS
+</button>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+📊 YOUR DASHBOARD
+</div>
+
+<div class="quick">
+
+<div class="quick-card">
+
+<div class="quick-icon">🏆</div>
+
+<div
+class="quick-number"
+id="homeTotal">
+0
+</div>
+
+<div class="quick-label">
+TOTAL MATCHES
+</div>
+
+</div>
+
+
+<div class="quick-card">
+
+<div class="quick-icon">🪙</div>
+
+<div
+class="quick-number"
+id="homeHeads">
+0
+</div>
+
+<div class="quick-label">
+HEADS
+</div>
+
+</div>
+
+
+<div class="quick-card">
+
+<div class="quick-icon">🔄</div>
+
+<div
+class="quick-number"
+id="homeTails">
+0
+</div>
+
+<div class="quick-label">
+TAILS
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+🚀 PLATFORM FEATURES
+</div>
+
+<div class="features">
+
+<div class="feature">
+<h3>🏏 Cricket</h3>
+<p>
+Perform a professional toss before
+your cricket match.
+</p>
+</div>
+
+<div class="feature">
+<h3>⚽ Football</h3>
+<p>
+Use the same system for football
+matches.
+</p>
+</div>
+
+<div class="feature">
+<h3>💾 Saved Matches</h3>
+<p>
+Your previous tosses are saved
+inside your browser.
+</p>
+</div>
+
+<div class="feature">
+<h3>📱 Mobile Ready</h3>
+<p>
+The interface automatically adapts
+to phones and tablets.
+</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= NEW TOSS ================= -->
+
+<section id="new" class="page">
+
+
+<div class="card">
+
+<div class="title">
+📋 MATCH INFORMATION
+</div>
+
+<div class="grid">
+
+<div>
+<label>MATCH NAME</label>
+
+<input
+id="matchName"
+placeholder="India vs Australia"
+>
+</div>
+
+<div>
+<label>DATE</label>
+
+<input
+id="matchDate"
+type="date"
+>
+</div>
+
+<div>
+<label>VENUE</label>
+
+<input
+id="venue"
+placeholder="Eden Gardens"
+>
+</div>
+
+<div>
+<label>SPORT</label>
+
+<select id="sport">
+
+<option value="Cricket">
+🏏 Cricket
+</option>
+
+<option value="Football">
+⚽ Football
+</option>
+
+<option value="General">
+🎮 General
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+👥 TEAM SETUP
+</div>
+
+<div class="teams">
+
+<div class="team">
+
+<div class="team-label">
+TEAM 1
+</div>
+
+<input
+id="team1"
+value="Team 1"
+>
+
+</div>
+
+<div class="vs">
+VS
+</div>
+
+<div class="team">
+
+<div class="team-label">
+TEAM 2
+</div>
+
+<input
+id="team2"
+value="Team 2"
+>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="title">
+🪙 TOSS SETUP
+</div>
+
+<label>WHO CALLS THE TOSS?</label>
+
+<div class="choice-grid">
+
+<button
+class="choice"
+id="caller1">
+TEAM 1
+</button>
+
+<button
+class="choice"
+id="caller2">
+TEAM 2
+</button>
+
+</div>
+
+
+<br>
+
+<label>CALL</label>
+
+<div class="choice-grid">
+
+<button
+class="choice"
+id="heads">
+🪙 HEADS
+</button>
+
+<button
+class="choice"
+id="tails">
+🪙 TAILS
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card coin-area">
+
+<div class="title">
+🪙 LIVE TOSS
+</div>
+
+<div class="coin-wrap">
+
+<div
+class="coin"
+id="coin">
+
+<div class="face">
+
+<b>H</b>
+<small>HEADS</small>
+
+</div>
+
+<div class="face back">
+
+<b>T</b>
+<small>TAILS</small>
+
+</div>
+
+</div>
+
+</div>
+
+
+<div
+class="coin-status"
+id="coinStatus">
+Waiting for setup...
+</div>
+
+
+<button
+class="toss"
+id="toss">
+🪙 TOSS COIN
+</button>
+
+</div>
+
+
+<div
+class="card result"
+id="result">
+
+<div class="result-label">
+TOSS RESULT
+</div>
+
+<div
+class="result-side"
+id="resultSide">
+-
+</div>
+
+<div class="winner">
+🏆 Winner:
+<strong id="winner">
+-
+</strong>
+</div>
+
+<div class="decision">
+
+<p>
+What does the winning team choose?
+</p>
+
+<div
+class="decision-grid"
+id="decisionGrid">
+
+<button
+class="decision-btn"
+id="decision1">
+🏏 BAT
+</button>
+
+<button
+class="decision-btn"
+id="decision2">
+🎯 BOWL
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ================= HISTORY ================= -->
+
+<section id="history" class="page">
+
+<div class="card">
+
+<div class="title">
+📜 SAVED MATCHES
+</div>
+
+<div id="historyBox">
+</div>
+
+<div class="history-actions">
+
+<button
+class="secondary"
+id="historyNew">
+➕ NEW TOSS
+</button>
+
+<button
+class="secondary"
+id="clearHistory">
+🗑️ CLEAR ALL
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+MATCH TOSS PRO • VERSION 7.0
+</footer>
+
+</div>
+
+
+<script>
+
+/* ======================================
+   MATCH TOSS PRO v7
+====================================== */
+
+
+/* VARIABLES */
+
+let caller = null;
+let call = null;
+let sport = "Cricket";
+
+let history =
+JSON.parse(
+localStorage.getItem("matchTossHistory")
+) || [];
+
+
+/* ELEMENTS */
+
+const pages =
+document.querySelectorAll(".page");
+
+const navButtons =
+document.querySelectorAll(".nav-btn");
+
+
+/* ======================================
+   NAVIGATION
+====================================== */
+
+function showPage(pageName){
+
+    pages.forEach(page => {
+
+        page.classList.remove("active");
+
+    });
+
+
+    const page =
+    document.getElementById(pageName);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+
+    navButtons.forEach(button => {
+
+        button.classList.toggle(
+            "active",
+            button.dataset.page === pageName
+        );
+
+    });
+
+
+    updateDashboard();
+
+}
+
+
+/* NAV BUTTONS */
+
+navButtons.forEach(button => {
+
+    button.addEventListener(
+    "click",
+    function(){
+
+        showPage(
+            this.dataset.page
+        );
+
+    });
+
+});
+
+
+/* START BUTTON */
+
+document
+.getElementById("startButton")
+.addEventListener(
+"click",
+function(){
+
+    showPage("new");
+
+});
+
+
+/* HISTORY NEW */
+
+document
+.getElementById("historyNew")
+.addEventListener(
+"click",
+function(){
+
+    showPage("new");
+
+});
+
+
+/* ======================================
+   DATE
+====================================== */
+
+const matchDate =
+document.getElementById("matchDate");
+
+const today =
+new Date();
+
+matchDate.value =
+new Date(
+today.getTime() -
+today.getTimezoneOffset()*60000
+)
+.toISOString()
+.split("T")[0];
+
+
+/* ======================================
+   ELEMENTS
+====================================== */
+
+const team1 =
+document.getElementById("team1");
+
+const team2 =
+document.getElementById("team2");
+
+const matchName =
+document.getElementById("matchName");
+
+const venue =
+document.getElementById("venue");
+
+const sportSelect =
+document.getElementById("sport");
+
+const caller1 =
+document.getElementById("caller1");
+
+const caller2 =
+document.getElementById("caller2");
+
+const heads =
+document.getElementById("heads");
+
+const tails =
+document.getElementById("tails");
+
+const coin =
+document.getElementById("coin");
+
+const coinStatus =
+document.getElementById("coinStatus");
+
+const toss =
+document.getElementById("toss");
+
+const result =
+document.getElementById("result");
+
+const resultSide =
+document.getElementById("resultSide");
+
+const winner =
+document.getElementById("winner");
+
+
+/* ======================================
+   SPORT
+====================================== */
+
+sportSelect.addEventListener(
+"change",
+function(){
+
+    sport =
+    this.value;
+
+    updateDecision();
+
+});
+
+
+/* ======================================
+   CALLER
+====================================== */
+
+caller1.addEventListener(
+"click",
+function(){
+
+    caller = "team1";
+
+    caller1.classList.add(
+        "selected"
+    );
+
+    caller2.classList.remove(
+        "selected"
+    );
+
+
+    coinStatus.textContent =
+    `${team1.value} will call the toss.`;
+
+});
+
+
+caller2.addEventListener(
+"click",
+function(){
+
+    caller = "team2";
+
+    caller2.classList.add(
+        "selected"
+    );
+
+    caller1.classList.remove(
+        "selected"
+    );
+
+
+    coinStatus.textContent =
+    `${team2.value} will call the toss.`;
+
+});
+
+
+/* ======================================
+   CALL
+====================================== */
+
+heads.addEventListener(
+"click",
+function(){
+
+    call = "HEADS";
+
+    heads.classList.add(
+        "selected"
+    );
+
+    tails.classList.remove(
+        "selected"
+    );
+
+
+    coinStatus.textContent =
+    "Call selected: HEADS";
+
+});
+
+
+tails.addEventListener(
+"click",
+function(){
+
+    call = "TAILS";
+
+    tails.classList.add(
+        "selected"
+    );
+
+    heads.classList.remove(
+        "selected"
+    );
+
+
+    coinStatus.textContent =
+    "Call selected: TAILS";
+
+});
+
+
+/* ======================================
+   TOSS
+====================================== */
+
+toss.addEventListener(
+"click",
+function(){
+
+    if(!caller){
+
+        alert(
+            "Please select who calls the toss."
+        );
+
+        return;
+
+    }
+
+
+    if(!call){
+
+        alert(
+            "Please select HEADS or TAILS."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !team1.value.trim() ||
+        !team2.value.trim()
+    ){
+
+        alert(
+            "Please enter both team names."
+        );
+
+        return;
+
+    }
+
+
+    toss.disabled = true;
+
+    coinStatus.textContent =
+    "🪙 COIN FLIPPING...";
+
+
+    coin.classList.remove(
+        "flip"
+    );
+
+
+    void coin.offsetWidth;
+
+
+    coin.classList.add(
+        "flip"
+    );
+
+
+    const resultValue =
+    Math.random() < .5
+    ? "HEADS"
+    : "TAILS";
+
+
+    setTimeout(
+    function(){
+
+        finishToss(
+            resultValue
+        );
+
+    },
+    2300
+    );
+
+});
+
+
+/* ======================================
+   FINISH TOSS
+====================================== */
+
+function finishToss(side){
+
+    coin.classList.remove(
+        "flip"
+    );
+
+
+    if(side === "HEADS"){
+
+        coin.style.transform =
+        "rotateY(0deg)";
+
+    }
+    else{
+
+        coin.style.transform =
+        "rotateY(180deg)";
+
+    }
+
+
+    resultSide.textContent =
+    side;
+
+
+    let winningTeam;
+
+
+    if(call === side){
+
+        winningTeam =
+        caller === "team1"
+        ? team1.value.trim()
+        : team2.value.trim();
+
+    }
+    else{
+
+        winningTeam =
+        caller === "team1"
+        ? team2.value.trim()
+        : team1.value.trim();
+
+    }
+
+
+    winner.textContent =
+    winningTeam;
+
+
+    coinStatus.textContent =
+    `Toss result: ${side}`;
+
+
+    result.classList.add(
+        "show"
+    );
+
+
+    updateDecision();
+
+
+    saveMatch(
+        side,
+        winningTeam
+    );
+
+
+    toss.disabled = false;
+
+}
+
+
+/* ======================================
+   DECISION
+====================================== */
+
+function updateDecision(){
+
+    const grid =
+    document.getElementById(
+        "decisionGrid"
+    );
+
+
+    if(!grid){
+        return;
+    }
+
+
+    grid.innerHTML = `
+
+        <button
+        class="decision-btn"
+        id="decision1">
+
+        ${sport === "Cricket"
+            ? "🏏 BAT"
+            : sport === "Football"
+            ? "⚽ KICK-OFF"
+            : "OPTION 1"}
+
+        </button>
+
+
+        <button
+        class="decision-btn"
+        id="decision2">
+
+        ${sport === "Cricket"
+            ? "🎯 BOWL"
+            : sport === "Football"
+            ? "🔄 CHOOSE SIDE"
+            : "OPTION 2"}
+
+        </button>
+
+    `;
+
+
+    document
+    .getElementById("decision1")
+    .onclick =
+    function(){
+
+        chooseDecision(
+            this.textContent
+        );
+
+    };
+
+
+    document
+    .getElementById("decision2")
+    .onclick =
+    function(){
+
+        chooseDecision(
+            this.textContent
+        );
+
+    };
+
+}
+
+
+/* ======================================
+   DECISION CHOICE
+====================================== */
+
+function chooseDecision(choice){
+
+    document
+    .getElementById("decisionGrid")
+    .innerHTML = `
+
+        <div class="selected-choice">
+        ${choice}
+        </div>
+
+    `;
+
+}
+
+
+/* ======================================
+   SAVE MATCH
+====================================== */
+
+function saveMatch(
+side,
+winningTeam
+){
+
+    const item = {
+
+        match:
+        matchName.value.trim()
+        || "Unnamed Match",
+
+        date:
+        matchDate.value,
+
+        venue:
+        venue.value.trim()
+        || "Unknown Venue",
+
+        sport:
+        sport,
+
+        team1:
+        team1.value.trim(),
+
+        team2:
+        team2.value.trim(),
+
+        caller:
+        caller === "team1"
+        ? team1.value.trim()
+        : team2.value.trim(),
+
+        call:
+        call,
+
+        result:
+        side,
+
+        winner:
+        winningTeam,
+
+        time:
+        new Date().toLocaleTimeString()
+
+    };
+
+
+    history.unshift(item);
+
+
+    history =
+    history.slice(0,100);
+
+
+    localStorage.setItem(
+        "matchTossHistory",
+        JSON.stringify(history)
+    );
+
+
+    renderHistory();
+
+    updateDashboard();
+
+}
+
+
+/* ======================================
+   HISTORY
+====================================== */
+
+function renderHistory(){
+
+    const box =
+    document.getElementById(
+        "historyBox"
+    );
+
+
+    if(history.length === 0){
+
+        box.innerHTML = `
+
+            <div class="empty">
+            No saved matches yet.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML = "";
+
+
+    history.forEach(
+    function(item){
+
+        const div =
+        document.createElement(
+            "div"
+        );
+
+
+        div.className =
+        "history-item";
+
+
+        div.innerHTML = `
+
+        <strong>
+        ${safe(item.team1)}
+        🆚
+        ${safe(item.team2)}
+        </strong>
+
+        <br>
+
+        🏆 ${safe(item.match)}
+
+        <br>
+
+        🎯 ${safe(item.sport)}
+
+        <br>
+
+        📅 ${safe(item.date)}
+
+        <br>
+
+        📍 ${safe(item.venue)}
+
+        <br>
+
+        🪙 Result:
+        <strong>
+        ${safe(item.result)}
+        </strong>
+
+        <br>
+
+        📢 Caller:
+        ${safe(item.caller)}
+
+        <br>
+
+        🏆 Winner:
+        <strong>
+        ${safe(item.winner)}
+        </strong>
+
+        `;
+
+
+        box.appendChild(div);
+
+    });
+
+}
+
+
+/* ======================================
+   SAFE TEXT
+====================================== */
+
+function safe(text){
+
+    return String(text)
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* ======================================
+   DASHBOARD
+====================================== */
+
+function updateDashboard(){
+
+    let headsCount = 0;
+    let tailsCount = 0;
+
+
+    history.forEach(
+    function(item){
+
+        if(item.result === "HEADS"){
+
+            headsCount++;
+
+        }
+        else{
+
+            tailsCount++;
+
+        }
+
+    });
+
+
+    document
+    .getElementById("homeTotal")
+    .textContent =
+    history.length;
+
+
+    document
+    .getElementById("homeHeads")
+    .textContent =
+    headsCount;
+
+
+    document
+    .getElementById("homeTails")
+    .textContent =
+    tailsCount;
+
+}
+
+
+/* ======================================
+   CLEAR HISTORY
+====================================== */
+
+document
+.getElementById("clearHistory")
+.addEventListener(
+"click",
+function(){
+
+    if(history.length === 0){
+
+        alert(
+            "There is no history to delete."
+        );
+
+        return;
+
+    }
+
+
+    const confirmDelete =
+    confirm(
+        "Delete all saved matches?"
+    );
+
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+    history = [];
+
+
+    localStorage.removeItem(
+        "matchTossHistory"
+    );
+
+
+    renderHistory();
+
+    updateDashboard();
+
+});
+
+
+/* ======================================
+   INITIALIZE
+====================================== */
+
+updateDecision();
+
+renderHistory();
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>

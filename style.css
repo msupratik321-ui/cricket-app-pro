@@ -1,0 +1,1818 @@
+/* =========================================
+   MATCH TOSS v8
+   PREMIUM SPORTS UI
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --bg: #030611;
+    --panel: rgba(10, 17, 35, 0.82);
+    --panel2: rgba(15, 24, 48, 0.8);
+    --cyan: #00c8ff;
+    --cyan2: #008cff;
+    --text: #f4f8ff;
+    --muted: #7c899f;
+    --border: rgba(111, 157, 210, 0.16);
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: var(--bg);
+
+    color: var(--text);
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================
+   BACKGROUND
+========================================= */
+
+.background {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -10;
+
+    background:
+
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(0, 200, 255, 0.16),
+            transparent 35%
+        ),
+
+        radial-gradient(
+            circle at 0% 80%,
+            rgba(70, 40, 220, 0.14),
+            transparent 35%
+        ),
+
+        #030611;
+}
+
+
+.grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.13;
+
+    background-image:
+
+        linear-gradient(
+            rgba(0, 200, 255, 0.12) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0, 200, 255, 0.12) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
+        );
+}
+
+
+.glow {
+
+    position: absolute;
+
+    width: 500px;
+
+    height: 500px;
+
+    border-radius: 50%;
+
+    filter: blur(100px);
+
+    opacity: 0.08;
+}
+
+
+.glow-one {
+
+    background: #00c8ff;
+
+    top: 20%;
+
+    left: -250px;
+}
+
+
+.glow-two {
+
+    background: #713cff;
+
+    bottom: -250px;
+
+    right: -200px;
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+
+    width: min(1000px, 94%);
+
+    margin: 35px auto;
+
+    padding: 28px;
+
+    border:
+
+        1px solid
+        rgba(0, 200, 255, 0.14);
+
+    border-radius: 28px;
+
+    background:
+        rgba(3, 7, 20, 0.88);
+
+    box-shadow:
+
+        0 30px 100px
+        rgba(0, 0, 0, 0.55),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.03);
+
+    backdrop-filter: blur(25px);
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 8px 4px 28px;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+
+.brand-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b1c32,
+            #071020
+        );
+
+    border:
+        1px solid
+        rgba(0, 200, 255, 0.25);
+
+    font-size: 23px;
+
+    box-shadow:
+        0 0 25px
+        rgba(0, 200, 255, 0.1);
+}
+
+
+.brand-small {
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 4px;
+}
+
+
+h1 {
+
+    font-size: 30px;
+
+    letter-spacing: 5px;
+}
+
+
+h1 span {
+
+    color: var(--cyan);
+
+    text-shadow:
+        0 0 20px
+        rgba(0, 200, 255, 0.4);
+}
+
+
+.status {
+
+    padding: 9px 13px;
+
+    border-radius: 30px;
+
+    border:
+        1px solid
+        rgba(0, 200, 255, 0.18);
+
+    color: #8c9ab0;
+
+    font-size: 9px;
+
+    letter-spacing: 2px;
+}
+
+
+.status-dot {
+
+    display: inline-block;
+
+    width: 7px;
+
+    height: 7px;
+
+    margin-right: 7px;
+
+    border-radius: 50%;
+
+    background: #00e89b;
+
+    box-shadow:
+        0 0 10px #00e89b;
+}
+
+
+/* =========================================
+   PANEL
+========================================= */
+
+.panel {
+
+    margin-top: 18px;
+
+    padding: 20px;
+
+    border-radius: 19px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14, 24, 48, 0.7),
+            rgba(7, 13, 29, 0.65)
+        );
+
+    border:
+        1px solid var(--border);
+}
+
+
+.section-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 16px;
+
+    color: #a8b4c8;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+
+.section-title span {
+
+    color: var(--cyan);
+
+    font-family: monospace;
+}
+
+
+/* =========================================
+   FORM
+========================================= */
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1.5fr 1fr 1.5fr;
+
+    gap: 12px;
+}
+
+
+.input-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.18);
+
+    border-radius: 11px;
+
+    outline: none;
+
+    background: rgba(2, 7, 18, 0.75);
+
+    color: white;
+
+    font-size: 13px;
+
+    transition: 0.2s;
+}
+
+
+input:focus {
+
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 0 20px
+        rgba(0, 200, 255, 0.1);
+}
+
+
+input::placeholder {
+
+    color: #4d5a70;
+}
+
+
+/* =========================================
+   MODE BUTTONS
+========================================= */
+
+.mode-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+.mode-button {
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.18);
+
+    background: rgba(2, 7, 18, 0.7);
+
+    color: #718096;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: 0.2s;
+}
+
+
+.mode-button span {
+
+    margin-left: 7px;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
+}
+
+
+.mode-button:hover {
+
+    transform: translateY(-2px);
+
+    border-color:
+        rgba(0, 200, 255, 0.4);
+
+}
+
+
+.mode-button.active {
+
+    color: white;
+
+    border-color: var(--cyan);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0, 170, 235, 0.25),
+            rgba(0, 100, 180, 0.1)
+        );
+
+    box-shadow:
+        0 0 25px
+        rgba(0, 200, 255, 0.1);
+}
+
+
+/* =========================================
+   TEAMS
+========================================= */
+
+.teams {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 80px 1fr;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+
+.team-card {
+
+    padding: 20px;
+
+    text-align: center;
+
+    border-radius: 18px;
+
+    background:
+        rgba(3, 9, 22, 0.7);
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.13);
+}
+
+
+.team-number {
+
+    color: var(--cyan);
+
+    font-size: 8px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 13px;
+}
+
+
+.logo-preview {
+
+    width: 95px;
+
+    height: 95px;
+
+    margin: 0 auto 15px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #1c2940,
+            #070d1c
+        );
+
+    border:
+        2px solid
+        rgba(0, 200, 255, 0.18);
+
+    font-size: 38px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 0 25px
+        rgba(0, 200, 255, 0.07);
+}
+
+
+.logo-preview img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+.logo-upload {
+
+    display: block;
+
+    margin-top: 9px;
+
+    color: #65738a;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+
+.logo-upload input {
+
+    display: none;
+}
+
+
+.versus {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.versus span {
+
+    color: var(--cyan);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+
+.vs-line {
+
+    width: 1px;
+
+    height: 40px;
+
+    background:
+        linear-gradient(
+            transparent,
+            var(--cyan),
+            transparent
+        );
+}
+
+
+/* =========================================
+   TOSS SETUP
+========================================= */
+
+.toss-setup {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+}
+
+
+.toss-setup .section-title {
+
+    grid-column: 1 / -1;
+}
+
+
+.setup-block {
+
+    padding: 15px;
+
+    border-radius: 13px;
+
+    background:
+        rgba(0, 0, 0, 0.16);
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.1);
+}
+
+
+.setup-label {
+
+    margin-bottom: 11px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+.choice-buttons {
+
+    display: flex;
+
+    gap: 8px;
+}
+
+
+.choice-button {
+
+    flex: 1;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.18);
+
+    background: #080f20;
+
+    color: #738198;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    transition: 0.2s;
+}
+
+
+.choice-button:hover {
+
+    border-color: var(--cyan);
+}
+
+
+.choice-button.active {
+
+    background:
+        linear-gradient(
+            145deg,
+            #00b8ee,
+            #008bd0
+        );
+
+    color: white;
+
+    border-color: var(--cyan);
+
+    box-shadow:
+        0 0 20px
+        rgba(0, 200, 255, 0.2);
+}
+
+
+/* =========================================
+   COIN SECTION
+========================================= */
+
+.coin-section {
+
+    margin-top: 22px;
+
+    padding: 35px 20px 30px;
+
+    text-align: center;
+
+    border-radius: 22px;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(0, 130, 200, 0.08),
+            transparent 50%
+        );
+}
+
+
+.coin-status {
+
+    color: #637087;
+
+    font-size: 9px;
+
+    letter-spacing: 4px;
+}
+
+
+/* =========================================
+   COIN
+========================================= */
+
+.coin-container {
+
+    width: 250px;
+
+    height: 250px;
+
+    margin: 20px auto 5px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    perspective: 1200px;
+}
+
+
+.coin {
+
+    width: 180px;
+
+    height: 180px;
+
+    position: relative;
+
+    transform-style: preserve-3d;
+
+    transition:
+        transform 1.2s
+        cubic-bezier(
+            0.17,
+            0.67,
+            0.15,
+            1.2
+        );
+
+    filter:
+        drop-shadow(
+            0 20px 20px
+            rgba(0, 0, 0, 0.6)
+        )
+
+        drop-shadow(
+            0 0 25px
+            rgba(0, 200, 255, 0.25)
+        );
+}
+
+
+.coin-side {
+
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    border-radius: 50%;
+
+    backface-visibility: hidden;
+
+    background:
+        radial-gradient(
+            circle at 32% 25%,
+            #ffffff,
+            #e1e1e1 25%,
+            #aaa 55%,
+            #666 85%,
+            #3d4148
+        );
+
+    border: 8px solid #676d74;
+
+    box-shadow:
+
+        inset 0 0 0 3px #f4f4f4,
+
+        inset 0 0 15px
+        rgba(0, 0, 0, 0.6),
+
+        0 0 0 2px #292d33;
+}
+
+
+.coin-ring {
+
+    width: 72%;
+
+    height: 72%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(50, 55, 60, 0.55);
+
+    box-shadow:
+        inset 0 0 10px
+        rgba(255, 255, 255, 0.6);
+}
+
+
+.coin-symbol {
+
+    font-size: 62px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    color: #20242a;
+
+    text-shadow:
+        1px 1px white;
+}
+
+
+.coin-name {
+
+    margin-top: 7px;
+
+    color: #33383e;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
+}
+
+
+.coin-front {
+
+    transform:
+        rotateY(0deg);
+}
+
+
+.coin-back {
+
+    transform:
+        rotateY(180deg);
+}
+
+
+/* =========================================
+   COIN ANIMATION
+========================================= */
+
+@keyframes coinGlow {
+
+    50% {
+
+        filter:
+            drop-shadow(
+                0 20px 20px
+                rgba(0, 0, 0, 0.6)
+            )
+
+            drop-shadow(
+                0 0 65px
+                rgba(0, 200, 255, 0.95)
+            );
+    }
+}
+
+
+.coin.flipping {
+
+    animation:
+        coinGlow 0.3s infinite;
+}
+
+
+/* =========================================
+   RESULT
+========================================= */
+
+.result {
+
+    min-height: 42px;
+
+    color: var(--cyan);
+
+    font-size: 34px;
+
+    font-weight: 900;
+
+    letter-spacing: 7px;
+
+    text-shadow:
+        0 0 20px
+        rgba(0, 200, 255, 0.4);
+}
+
+
+.winner {
+
+    min-height: 25px;
+
+    margin-top: 7px;
+
+    color: #a1adbf;
+
+    font-size: 13px;
+}
+
+
+@keyframes resultPop {
+
+    from {
+
+        opacity: 0;
+
+        transform: scale(0.6);
+    }
+
+    70% {
+
+        transform: scale(1.1);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1);
+    }
+}
+
+
+.result-pop {
+
+    animation:
+        resultPop 0.5s ease-out;
+}
+
+
+/* =========================================
+   TOSS BUTTON
+========================================= */
+
+.toss-button {
+
+    width: min(450px, 90%);
+
+    margin-top: 20px;
+
+    padding: 17px;
+
+    border: none;
+
+    border-radius: 13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #00c8ff,
+            #007dcc
+        );
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 900;
+
+    letter-spacing: 2px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0, 170, 255, 0.25);
+
+    transition: 0.2s;
+}
+
+
+.toss-button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0, 200, 255, 0.4);
+}
+
+
+.toss-button:active {
+
+    transform: scale(0.97);
+}
+
+
+.toss-button:disabled {
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+.button-coin {
+
+    margin-right: 8px;
+}
+
+
+/* =========================================
+   DECISION
+========================================= */
+
+.decision-panel {
+
+    margin-top: 15px;
+
+    padding: 18px;
+
+    border-radius: 17px;
+
+    background:
+        rgba(0, 200, 255, 0.035);
+
+    border:
+        1px solid
+        rgba(0, 200, 255, 0.12);
+
+    text-align: center;
+}
+
+
+.decision-title {
+
+    color: #7c899f;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 13px;
+}
+
+
+.decision-buttons {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+
+.decision-button {
+
+    min-width: 180px;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.18);
+
+    background: #091123;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+
+.decision-button:hover {
+
+    transform: translateY(-2px);
+
+    border-color: var(--cyan);
+}
+
+
+.decision-button.primary {
+
+    background:
+        linear-gradient(
+            135deg,
+            #00aeea,
+            #007dcc
+        );
+}
+
+
+/* =========================================
+   FINAL RESULT
+========================================= */
+
+.final-card {
+
+    margin-top: 20px;
+
+    padding: 24px;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(17, 29, 57, 0.85),
+            rgba(5, 12, 28, 0.85)
+        );
+
+    border:
+        1px solid
+        rgba(0, 200, 255, 0.13);
+}
+
+
+.final-top {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.final-label {
+
+    color: #68758b;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+}
+
+
+.live-badge {
+
+    color: #00e89b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+.final-card h2 {
+
+    margin-top: 9px;
+
+    font-size: 25px;
+}
+
+
+.final-details {
+
+    margin-top: 5px;
+
+    color: #718096;
+
+    font-size: 10px;
+}
+
+
+.final-teams {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 40px;
+
+    margin-top: 23px;
+}
+
+
+.final-team {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 9px;
+}
+
+
+.final-team strong {
+
+    font-size: 11px;
+
+    letter-spacing: 2px;
+}
+
+
+.final-logo {
+
+    width: 65px;
+
+    height: 65px;
+
+    padding: 5px;
+
+    border-radius: 50%;
+
+    object-fit: contain;
+
+    background: #0b1428;
+
+    border:
+        1px solid
+        rgba(0, 200, 255, 0.2);
+}
+
+
+.final-vs {
+
+    color: var(--cyan);
+
+    font-size: 10px;
+
+    font-weight: bold;
+}
+
+
+.result-divider {
+
+    height: 1px;
+
+    margin: 22px 0;
+
+    background:
+        rgba(255, 255, 255, 0.06);
+}
+
+
+.final-coin {
+
+    text-align: center;
+
+    color: #78869b;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+
+.final-winner {
+
+    margin-top: 8px;
+
+    text-align: center;
+
+    color: var(--cyan);
+
+    font-size: 25px;
+
+    font-weight: 900;
+
+    text-shadow:
+        0 0 20px
+        rgba(0, 200, 255, 0.3);
+}
+
+
+.final-decision {
+
+    margin-top: 8px;
+
+    text-align: center;
+
+    color: #a9b4c5;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   STATISTICS
+========================================= */
+
+.statistics {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    border:
+        1px solid var(--border);
+}
+
+
+.stats-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+}
+
+
+.stat {
+
+    padding: 18px;
+
+    text-align: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(4, 10, 24, 0.7);
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.1);
+}
+
+
+.stat-name {
+
+    color: #69768b;
+
+    font-size: 8px;
+
+    letter-spacing: 2px;
+}
+
+
+.stat-number {
+
+    margin-top: 8px;
+
+    color: var(--cyan);
+
+    font-size: 30px;
+
+    font-weight: 900;
+}
+
+
+.stat-percent {
+
+    margin-top: 4px;
+
+    color: #536076;
+
+    font-size: 9px;
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+.history-section {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.02);
+
+    border:
+        1px solid var(--border);
+}
+
+
+.history-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+}
+
+
+.clear-button {
+
+    padding: 7px 11px;
+
+    border-radius: 7px;
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.2);
+
+    background: transparent;
+
+    color: #69768b;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+
+.clear-button:hover {
+
+    color: white;
+
+    border-color: var(--cyan);
+}
+
+
+.history {
+
+    max-height: 260px;
+
+    overflow-y: auto;
+
+    padding-right: 5px;
+}
+
+
+.history p {
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: #4e5a6d;
+
+    font-size: 12px;
+}
+
+
+.history-item {
+
+    margin-bottom: 8px;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border-left:
+        3px solid var(--cyan);
+
+    color: #9ba8ba;
+
+    font-size: 11px;
+
+    line-height: 1.8;
+}
+
+
+.history-item strong {
+
+    color: white;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESET
+========================================= */
+
+.reset-button {
+
+    display: block;
+
+    margin: 22px auto 0;
+
+    padding: 10px 18px;
+
+    border-radius: 9px;
+
+    border:
+        1px solid
+        rgba(110, 145, 190, 0.18);
+
+    background: transparent;
+
+    color: #69768b;
+
+    cursor: pointer;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    transition: 0.2s;
+}
+
+
+.reset-button:hover {
+
+    color: white;
+
+    border-color: var(--cyan);
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+
+    padding-top: 25px;
+
+    text-align: center;
+
+    color: #3d485a;
+
+    font-size: 8px;
+
+    letter-spacing: 3px;
+}
+
+
+footer span {
+
+    margin: 0 7px;
+
+    color: #1f2d40;
+}
+
+
+/* =========================================
+   SHAKE
+========================================= */
+
+@keyframes tossShake {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-4px);
+    }
+
+    50% {
+        transform: translateX(4px);
+    }
+
+    75% {
+        transform: translateX(-3px);
+    }
+}
+
+
+.app.tossing {
+
+    animation:
+        tossShake 0.35s
+        linear 3;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .app {
+
+        width: 96%;
+
+        padding: 17px;
+
+        margin: 15px auto;
+
+    }
+
+
+    .header {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .status {
+
+        align-self: flex-start;
+
+    }
+
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .teams {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .versus {
+
+        flex-direction: row;
+
+        justify-content: center;
+
+    }
+
+
+    .vs-line {
+
+        width: 45px;
+
+        height: 1px;
+
+    }
+
+
+    .toss-setup {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .toss-setup .section-title {
+
+        grid-column: auto;
+
+    }
+
+
+    .mode-buttons {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .stats-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .final-teams {
+
+        gap: 18px;
+
+    }
+
+
+    .decision-buttons {
+
+        flex-direction: column;
+
+    }
+
+
+    .decision-button {
+
+        width: 100%;
+
+    }
+
+
+    h1 {
+
+        font-size: 25px;
+
+    }
+
+}
